@@ -44,13 +44,14 @@ public class Main {
                     .setReadBotMessages(false)
                     .setPrefix("/")
                     .setOwners(Constants.OWNER_ID)
-                    .setVerbose(true)
-                    .build();
+                    .setVerbose(false);
 
             kc.registerObject(new CreateSeriesCmd());
             kc.registerObject(new ModifyCmd());
             kc.registerObject(new RandomPickCmd());
             logger.info("Successfully registered our KC commands!");
+
+            kc.build();
         }
         catch (Exception e) {
             logger.error(e.getMessage());
