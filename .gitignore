@@ -7,7 +7,6 @@ build/
 gradle/wrapper
 gradlew
 gradlew.bat
-.circleci/config.bak
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
