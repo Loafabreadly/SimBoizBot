@@ -62,7 +62,7 @@ public class Main {
     //TODO Add in series tracker JSON file
 
     private static String getToken() {
-        String token = System.getenv("DISCORD_TOKEN").;
+        String token = System.getenv("DISCORD_TOKEN");
         logger.info("Env var was defined for token!");
         return Objects.requireNonNull(token);
     }
