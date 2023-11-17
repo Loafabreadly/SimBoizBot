@@ -1,10 +1,11 @@
 package com.github.loafabreadly.command;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.loafabreadly.ErrorHandler;
+import com.github.loafabreadly.utils.ErrorHandler;
 import com.github.loafabreadly.Main;
-import com.github.loafabreadly.SeriesObject;
-import com.github.loafabreadly.SimBoizEmbedBuilder;
+import com.github.loafabreadly.structures.SeriesObject;
+import com.github.loafabreadly.utils.SimBoizEmbedBuilder;
+import com.github.loafabreadly.utils.BotFile;
 import lombok.NonNull;
 import me.koply.kcommando.internal.OptionType;
 import me.koply.kcommando.internal.annotations.HandleSlash;
@@ -15,7 +16,6 @@ import org.javacord.api.event.interaction.SlashCommandCreateEvent;
 import org.javacord.api.interaction.SlashCommandInteraction;
 import org.javacord.api.interaction.callback.InteractionFollowupMessageBuilder;
 
-import java.io.File;
 import java.util.Random;
 
 public class RandomPickCmd implements Command {
@@ -35,18 +35,21 @@ public class RandomPickCmd implements Command {
         String seriesNoSpace = e.getArgumentStringValueByName("series").orElseThrow().toLowerCase().replace(" ", "");
 
         try {
-            File file = new File(seriesNoSpace +".json");
-            ObjectMapper om = new ObjectMapper();
-            SeriesObject seriesObject = om.readValue(file, SeriesObject.class);
-            Random r = new Random();
-            int carsIndex = r.nextInt(seriesObject.getCars().size());
-            int trackIndex = r.nextInt(seriesObject.getTracks().size());
-
-
-            response.addEmbed(new SimBoizEmbedBuilder()
-                    .addField("Series chosen", file.getName())
-                    .addField("Random Car", seriesObject.getCars().get(carsIndex))
-                    .addField("Random Track", seriesObject.getTracks().get(trackIndex))).send().join();
+            if (!new BotFile(seriesNoSpace + ".json").exists()) {
+                response.append("This series file does not exist!").send().join();
+                return;
+            } else {
+                BotFile file = new BotFile(seriesNoSpace +".json");
+                ObjectMapper om = new ObjectMapper();
+                SeriesObject seriesObject = om.readValue(file, SeriesObject.class);
+                Random r = new Random();
+                int carsIndex = r.nextInt(seriesObject.getCars().size());
+                int trackIndex = r.nextInt(seriesObject.getTracks().size());
+                response.addEmbed(new SimBoizEmbedBuilder()
+                        .addField("Series chosen", file.getName())
+                        .addField("Random Car", seriesObject.getCars().get(carsIndex))
+                        .addField("Random Track", seriesObject.getTracks().get(trackIndex))).send().join();
+            }
         }catch (Exception ex) {
             logger.error(ex.toString());
             response.addEmbed(ErrorHandler.embedError(ex)).send().join();

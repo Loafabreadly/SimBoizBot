@@ -1,5 +1,6 @@
-package com.github.loafabreadly;
+package com.github.loafabreadly.utils;
 
+import com.github.loafabreadly.Main;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.javacord.api.entity.message.embed.EmbedBuilder;

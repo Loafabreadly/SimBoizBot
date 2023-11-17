@@ -1,4 +1,4 @@
-package com.github.loafabreadly;
+package com.github.loafabreadly.structures;
 
 import lombok.Getter;
 import lombok.Setter;
