@@ -1,6 +1,7 @@
 package com.github.loafabreadly.command;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.loafabreadly.utils.BotSeriesFile;
 import com.github.loafabreadly.utils.ErrorHandler;
 import com.github.loafabreadly.Main;
 import com.github.loafabreadly.structures.SeriesObject;
@@ -35,7 +36,7 @@ public class RandomPickCmd implements Command {
         String seriesNoSpace = e.getArgumentStringValueByName("series").orElseThrow().toLowerCase().replace(" ", "");
 
         try {
-            if (!new BotFile(seriesNoSpace + ".json").exists()) {
+            if (!new BotSeriesFile(seriesNoSpace + ".json").exists()) {
                 response.append("This series file does not exist!").send().join();
                 return;
             } else {
