@@ -40,7 +40,7 @@ public class RandomPickCmd implements Command {
                 response.append("This series file does not exist!").send().join();
                 return;
             } else {
-                BotFile file = new BotFile(seriesNoSpace +".json");
+                BotSeriesFile file = new BotSeriesFile(seriesNoSpace +".json");
                 ObjectMapper om = new ObjectMapper();
                 SeriesObject seriesObject = om.readValue(file, SeriesObject.class);
                 Random r = new Random();

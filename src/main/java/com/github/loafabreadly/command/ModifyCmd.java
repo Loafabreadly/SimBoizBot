@@ -1,6 +1,7 @@
 package com.github.loafabreadly.command;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.loafabreadly.utils.BotSeriesFile;
 import com.github.loafabreadly.utils.ErrorHandler;
 import com.github.loafabreadly.Main;
 import com.github.loafabreadly.structures.SeriesObject;
@@ -42,7 +43,7 @@ public class ModifyCmd implements Command {
         String objectType = e.getArgumentStringValueByName("object").orElseThrow().toLowerCase().replace(" ", "");
 
         try {
-            File file = new File(seriesNoSpace + ".json");
+            BotSeriesFile file = new BotSeriesFile(seriesNoSpace + ".json");
 
             if (file.exists()) { //Does the series we want to modify exist even?
                 ObjectMapper om = new ObjectMapper();
