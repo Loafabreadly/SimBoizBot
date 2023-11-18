@@ -2,7 +2,7 @@ version: '3'
 
 services:
   f1discord-bot:
-    image: loafabreadly/simboizbot-bot:latest
+    image: loafabreadly/simboizbot:latest
     environment:
       - DISCORD_TOKEN=[ DICSORD TOKEN ]
     restart: always
