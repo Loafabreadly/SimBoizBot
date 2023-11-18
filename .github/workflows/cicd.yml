@@ -42,4 +42,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: loafabreadly/simboizbot-bot:latest
+          tags: loafabreadly/simboizbot:latest
