@@ -1,9 +1,10 @@
 package com.github.loafabreadly.command;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.loafabreadly.ErrorHandler;
+import com.github.loafabreadly.utils.BotSeriesFile;
+import com.github.loafabreadly.utils.ErrorHandler;
 import com.github.loafabreadly.Main;
-import com.github.loafabreadly.SeriesObject;
+import com.github.loafabreadly.structures.SeriesObject;
 import lombok.NonNull;
 import me.koply.kcommando.internal.OptionType;
 import me.koply.kcommando.internal.annotations.HandleSlash;
@@ -16,7 +17,6 @@ import org.javacord.api.interaction.callback.InteractionFollowupMessageBuilder;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CreateSeriesCmd implements Command {
 
@@ -36,7 +36,7 @@ public class CreateSeriesCmd implements Command {
         try {
             String optionWithoutSpace = e.getArgumentStringValueByName("series").orElseThrow().toLowerCase().replace(" ", "");
             logger.trace(optionWithoutSpace);
-            File seriesFile = new File(optionWithoutSpace + ".json");
+            BotSeriesFile seriesFile = new BotSeriesFile(optionWithoutSpace + ".json");
 
             if (seriesFile.exists()) {
                 response.append("This series file name already exists!").send().join();

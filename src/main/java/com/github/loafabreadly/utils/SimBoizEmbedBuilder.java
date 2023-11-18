@@ -1,4 +1,4 @@
-package com.github.loafabreadly;
+package com.github.loafabreadly.utils;
 
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 

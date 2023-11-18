@@ -5,6 +5,7 @@ import com.github.loafabreadly.command.Command;
 import com.github.loafabreadly.command.CreateSeriesCmd;
 import com.github.loafabreadly.command.ModifyCmd;
 import com.github.loafabreadly.command.RandomPickCmd;
+import com.github.loafabreadly.utils.Constants;
 import me.koply.kcommando.KCommando;
 import me.koply.kcommando.integration.impl.javacord.JavacordIntegration;
 import org.apache.logging.log4j.LogManager;
@@ -44,13 +45,13 @@ public class Main {
                     .setReadBotMessages(false)
                     .setPrefix("/")
                     .setOwners(Constants.OWNER_ID)
-                    .setVerbose(true)
-                    .build();
+                    .setVerbose(false);
 
             kc.registerObject(new CreateSeriesCmd());
             kc.registerObject(new ModifyCmd());
             kc.registerObject(new RandomPickCmd());
             logger.info("Successfully registered our KC commands!");
+            kc.build();
         }
         catch (Exception e) {
             logger.error(e.getMessage());
@@ -59,7 +60,6 @@ public class Main {
 
     //TODO Add in View command
     //TODO Add in series tracker JSON file
-    //TODO Add in randomizer command
 
     private static String getToken() {
         String token = System.getenv("DISCORD_TOKEN");

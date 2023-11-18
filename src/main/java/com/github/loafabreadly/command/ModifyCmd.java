@@ -1,10 +1,11 @@
 package com.github.loafabreadly.command;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.loafabreadly.ErrorHandler;
+import com.github.loafabreadly.utils.BotSeriesFile;
+import com.github.loafabreadly.utils.ErrorHandler;
 import com.github.loafabreadly.Main;
-import com.github.loafabreadly.SeriesObject;
-import com.github.loafabreadly.SimBoizEmbedBuilder;
+import com.github.loafabreadly.structures.SeriesObject;
+import com.github.loafabreadly.utils.SimBoizEmbedBuilder;
 import lombok.NonNull;
 import me.koply.kcommando.internal.OptionType;
 import me.koply.kcommando.internal.annotations.HandleSlash;
@@ -16,7 +17,6 @@ import org.javacord.api.interaction.SlashCommandInteraction;
 import org.javacord.api.interaction.callback.InteractionFollowupMessageBuilder;
 
 import java.io.File;
-import java.util.Iterator;
 import java.util.List;
 
 public class ModifyCmd implements Command {
@@ -43,7 +43,7 @@ public class ModifyCmd implements Command {
         String objectType = e.getArgumentStringValueByName("object").orElseThrow().toLowerCase().replace(" ", "");
 
         try {
-            File file = new File(seriesNoSpace + ".json");
+            BotSeriesFile file = new BotSeriesFile(seriesNoSpace + ".json");
 
             if (file.exists()) { //Does the series we want to modify exist even?
                 ObjectMapper om = new ObjectMapper();
